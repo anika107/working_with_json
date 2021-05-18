@@ -1,0 +1,38 @@
+{
+  "roles": [
+    {
+      "rolename": "role2",
+      "Username": "5",
+      "Password": "pass"
+    },
+    {
+      "rolename": "role2",
+      "Username": "6",
+      "Password": "pass"
+    },
+    {
+      "rolename": "role1",
+      "Username": "1",
+      "Password": "pas1",
+      "is_root": "true"
+    },
+    {
+      "rolename": "role1",
+      "Username": "2",
+      "Password": "pas1",
+      "is_root": "true"
+    },
+    {
+      "rolename": "role1",
+      "Username": "3",
+      "Password": "rrr",
+      "is_root": "true"
+    },
+    {
+      "rolename": "role1",
+      "Username": "4",
+      "Password": "rrr",
+      "is_root": "true"
+    }
+  ]
+}

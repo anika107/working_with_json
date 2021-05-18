@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <link rel='stylesheet' href='https:////maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" />
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+
+
+    <style>
+        .leftSide {
+            background-color: #222;
+            height: 100vh;
+        }
+
+        .rightSide {
+            background-color: whitesmoke;
+            overflow-y: scroll;
+        }
+
+        /* #sortable {
+            margin-top: 20px;
+        } */
+
+        /* #sortable,
+        #sortable1 {
+            list-style-type: none;
+        }
+        #sortable li,
+        #sortable1 div {
+            padding: 0.4em;
+            text-align: center;
+            width: 100%;
+            font-size: 19px;
+        }
+        #sortable li span,
+        #sortable1 div {
+            position: absolute;
+            margin-left: -1.3em;
+        } */
+
+        #droppable {
+            width: 98%;
+            height: 90vh;
+            position: absolute;
+            padding-top: 10px;
+            padding-bottom: 50px;
+            z-index: 0;
+        }
+
+        .addBtn {
+            position: relative;
+            height: 60px;
+            background-color: #333;
+            z-index: 99999;
+            top: 0;
+        }
+
+        .addBtn button {
+            margin-left: 50%;
+            transform: translate(-50%, 0);
+            margin-top: 10px;
+            z-index: 99999;
+        }
+
+        /* 
+        .inputGrp {
+            margin: 10px;
+            display: inline;
+            width: 100%;
+            position: relative;
+            margin-left: 50%;
+        transform: translate(-50%,0);
+        } */
+
+        /* .inputGrp span {
+            font-size: 26px;
+        } */
+        /* 
+        .inputGrp input[type=text],
+        .inputGrp input[type=password] {
+       
+            box-sizing: border-box;
+            background-color: yellow;
+  
+        } */
+        .inputInfo h3 {
+            font-size: 23px;
+            text-align: center;
+        }
+
+        .userDesign {
+            display: block;
+            text-align: left;
+            width: 100%;
+            position: relative;
+            background-color: transparent;
+            padding: 15px 30px;
+          
+            color: #fff;
+        }
+
+        .show,
+        .content {
+            display: none;
+        }
+        .content{
+            background-color: transparent !important;
+            color: #fff;
+            border: none;
+            padding: 0px 2px 3px 60px;
+        }
+
+        .show:checked~.content {
+            display: block;
+        }
+
+        .showtwo,
+        .javaTwo {
+            display: none;
+        }
+
+        .showtwo:checked~.javaTwo {
+            display: block;
+        }
+
+        .javaBgc {
+            background-color: #222;
+            color: white;
+        }
+
+        /* .role1{
+            background-color: red;
+        }
+        .role2{
+            background-color: yellow;
+        } */
+        #droppable .role2 {
+            width: 48%;
+            box-sizing: border-box;
+            padding: 10px 8px;
+            margin: 2px 1%;
+        }
+
+        #droppable .role1 {
+            width: 31.33%;
+            box-sizing: border-box;
+            padding: 10px 8px;
+            margin: 2px 1%;
+        }
+
+
+        :focus {
+            outline: none;
+        }
+
+        /* necessary to give position: relative to parent. */
+        input[type="text"] {
+            font: 15px/24px 'Muli', sans-serif;
+            color: #333;
+            width: 100%;
+            box-sizing: border-box;
+            letter-spacing: 1px;
+        }
+
+        :focus {
+            outline: none;
+        }
+
+        .col-3 {
+            float: left;
+            width: 27.33%;
+            margin: 40px 3%;
+            position: relative;
+        }
+
+        /* necessary to give position: relative to parent. */
+        input[type="text"] {
+            font: 15px/24px "Lato", Arial, sans-serif;
+            color: #333;
+            width: 100%;
+            box-sizing: border-box;
+            letter-spacing: 1px;
+        }
+
+
+        .effect-2 {
+            border: 0;
+            padding: 7px 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+
+
+
+
+
+
+        .menu-parent {
+            background: #323232;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .menu-parent.style1 {
+            background: #1e7cdc;
+        }
+
+        .menu-parent.style2 {
+            background: #f77528;
+        }
+
+        .menu-parent.style3 {
+            background: #50bd0b;
+        }
+
+        .menu-parent * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-parent li {
+            list-style: none;
+        }
+
+        .menu-parent ul ul {
+            display: none;
+        }
+
+        .menu-parent li.active>ul {
+            display: block;
+        }
+
+        .menu-parent>ul>li>a {
+            position: relative;
+            display: block;
+            background: #222;
+            padding: 0 30px;
+            font-size: 16px;
+            line-height: 4;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .menu-parent>ul>li>a .fa {
+            margin-right: 8px;
+        }
+
+        .menu-parent ul ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            line-height: 4;
+            display: block;
+            padding: 0px 2px 3px 60px;
+            position: relative;
+            background: #222;
+        }
+
+        .menu-parent ul ul li a:hover {
+            background: #003545;
+        }
+
+        .menu-parent ul ul ul {
+            background: rgba(0, 0, 0, .1);
+            padding: 0;
+        }
+
+        .menu-parent a:not(:only-child):after {
+            position: absolute;
+            right: 20px;
+            content: "\f067";
+            top: -6px;
+            font-size: 20px;
+            font-family: FontAwesome;
+        }
+
+        .menu-parent .active>a:not(:only-child):after {
+            content: "\f068";
+            top: -6px;
+            font-size: 20px;
+            font-family: FontAwesome;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/add" method="POST">
+        <div class="container-fluid">
+
+            <div class="row">
+
+
+                <!--  -->
+                <div class="col-md-3 leftSide">
+                     <!--div id="sortable">
+                        <% for(var i=0; i < rolenames.length; i++) { %>
+                            <input class="show" id="s<%=rolenames[i]%>" type=checkbox>
+                            <label for="s<%=rolenames[i]%>" class="userDesign">
+                                <i class="fa fa-tasks"></i>  <%=rolenames[i]%><i class="fa fa-plus" style="float: right;"></i>
+                            </label>
+                            <% for(var j=0; j < inputs[i].length; j++) { %>
+                                <% var user = Object.keys(inputs[i][j]) %>
+                                <% for(var k=0; k < user.length; k++) { %>
+                                <% var user_role = user[k]+"_"+rolenames[i] %>
+                                
+                            <li class="ui-state-default content" id=<%=user_role%>>
+                                <i class="fa fa-greater-than" style="font-size: 14px;"></i> <%=user[k]%>
+                            </li>
+                            <% } %>
+                            <% } %>
+                            <% } %>
+                    </div--> 
+
+                    <div class="horizontal">
+                        <div class="verticals four">
+                            <div id="accordian" class="menu-parent style1">
+                                <ul class="menu">
+                                    <% for(var i=0; i < rolenames.length; i++) { %>
+                                        <li class="menu-child">
+                                            <a href=""><i class="fa fa-tasks"></i>
+                                                <%=rolenames[i]%>
+                                            </a>
+                                            <ul>
+                                                <div id="sortable<%=i%>">
+                                                    <% for(var j=0; j < inputs[i].length; j++) { %>
+                                                        <% var user = Object.keys(inputs[i][j]) %>
+                                                        <% for(var k=0; k < user.length; k++) { %>
+                                                        <% var user_role = user[k]+"_"+rolenames[i] %>
+                                                    <li id="<%=user_role%>"><a href=""><i class="fa fa-greater-than"></i>
+                                                            <%=user[k]%>
+                                                        </a></li>
+                                                        <% } %>
+                                                        <% } %>
+                                                </div>
+                                            </ul>
+                                        </li>
+                                        <% } %>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <!-- <div class="col-md-3 input-effect">
+                    <input class="effect-20" type="text" placeholder="">
+                    <label>First Name</label>
+                    <span class="focus-border"><i></i></span>
+                </div> -->
+                <div class="col-md-9 rightSide">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="addBtn">
+                                <button class="btn btn-info">Add Information</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="droppable" class="sortTxtbox"></div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+    <!-- <a href="/update_users">Update Users</a> -->
+
+
+
+
+
+
+    <script>
+
+
+        //var rolenames = JSON.parse(decodeURI("{{rolenames}}"));
+        var rolenames = '<%- JSON.stringify(rolenames) %>';
+        rolenames = JSON.parse(rolenames)
+        var inputs = '<%- JSON.stringify(inputs) %>';
+        inputs = JSON.parse(inputs)
+        console.log(rolenames)
+        $(function () {
+            
+            for(var i = 0; i < rolenames.length; i ++){
+            x = "#sortable"+i
+            $(x).sortable();
+            $(x).disableSelection();
+            /*
+            $("#sortable1").sortable();
+            $("#sortable1").disableSelection();
+            */
+            
+
+            $(".sortTxtbox").sortable();
+            $(".sortTxtbox").disableSelection();
+            }
+        });
+
+        function getNewId(type) {
+            var newId;
+            /*
+            if (type == "textbox")
+                newId = $('#droppable').find(':text').length
+            if (type == "textbox2")
+                newId = $('#droppable').find(':text').length
+            */
+            for (var i = 0; i < rolenames.length; i++) {
+                if (type == rolenames[i]) {
+                    newId = $('#droppable').find(':text').length
+                }
+            }
+            if (type == "chekbox")
+                newId = $('#droppable').find(':checkbox').length
+            if (type == "dropdown")
+                newId = $('#droppable').find('select').length
+            if (type == "button")
+                newId = $('#droppable').find(':button').length
+            if (type == "label")
+                newId = $('#droppable').find('label').length
+            return type + (newId + 1);
+        }
+
+        $(function () {
+            $(".draggable").draggable();
+            $("#droppable").droppable({
+
+                drop: function (event, ui) {
+                    var draggableId = ui.draggable.attr("id");
+                    var newid = getNewId(draggableId);
+
+                    for (var i = 0; i < rolenames.length; i++) {
+                        for(var j = 0; j < inputs[i].length; j ++){
+                            var user = Object.keys(inputs[i][j])
+                            for(var d= 0; d < user.length; d ++){
+                            var user_role = user[d] + "_"+rolenames[i]
+                            if (draggableId == user_role) {
+                            var user_infos = inputs[i][j][user[d]]
+                            user_info = user_infos[0]
+                            var user_key = Object.keys(user_info)
+                            $(this).append('<div class="inputInfo"><h3>'+'('+rolenames[i]+')' +user[d]+'</h3>')
+                                for(k = 0; k < user_key.length; k ++){
+                                var info_user_role = user_key[k]+"_"+user_role
+                                $(this).append('<input class="effect-2 ' + rolenames[i] + '" id="' + newid + '" type="text" name="'+ info_user_role+  '" placeholder="' + user_key[k] + '"><span class="focus-border"></span>')
+                            }
+                            }
+                        }
+                    }
+                }
+
+                    if (draggableId == "textbox") {
+                        $(this).append(`<div class="inputGrp">
+                        <span>user info</span>
+                        <input class="" id="' + newid + '" type="text" name="username" placeholder="User Name">
+                        <input class="" id="' + newid + '" type="password" name="password" placeholder="Password">
+                        <input class="" id="' + newid + '" type="text" name="is_root" placeholder="true/false">
+                </div>`)
+                    }
+                    else if (draggableId == "textbox2") {
+                        $(this).append(`<div class="inputGrp">
+                         <span>Javascript</span>
+                        <input id="" + newid + '" type="text" name="module" placeholder="Module">
+                        <input id="" + newid + '" type="password" name="version" placeholder="Password">
+                        </div>
+                        `)
+                    }
+
+                    else if (draggableId == "chekbox") {
+                        $(this).append('<li><label><input  id="' + newid + '" type="checkbox" value="">newid</label></li>')
+                    }
+                    else if (draggableId == "dropdown") {
+                        $(this).append('<li><select   id="' + newid + '"   >' +
+                            '<option value="volvo">Volvo</option>' +
+                            '<option value="saab">Saab</option>' +
+                            '<option value="fiat">Fiat</option>' +
+                            ' <option value="audi">Audi</option>' +
+                            ' </select></li>')
+                    }
+                    else if (draggableId == "button") {
+                        $(this).append('<button type="button" class="btn btn-labeled btn-success">' +
+                            '<span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>' + "Submit" +
+                            '</button>')
+                    }
+                    else if (draggableId == "label") {
+                        $(this).append('<li><label id="' + newid + '" onclick="EditLabel();" class="editable">Label</label></li>')
+                    }
+
+
+                }
+            });
+        });
+
+
+
+        function EditLabel() {
+            debugger
+            var label = $(this);
+
+            label.after("<input type = 'text' style = 'display:none' />");
+
+            //Reference the TextBox.
+            var textbox = $(this).next();
+
+            //Set the name attribute of the TextBox.
+            var id = this.id.split('_')[this.id.split('_').length - 1];
+            textbox[0].name = id.replace("lbl", "txt");
+
+            //Assign the value of Label to TextBox.
+            textbox.val(label.html());
+
+            //When Label is clicked, hide Label and show TextBox.
+            label.click(function () {
+                $(this).hide();
+                $(this).next().show();
+            });
+
+            //When focus is lost from TextBox, hide TextBox and show Label.
+            textbox.focusout(function () {
+                $(this).hide();
+                $(this).prev().html($(this).val());
+                $(this).prev().show();
+            });
+        }
+
+
+        function myFunctionDown() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+    </script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            // prevent page from jumping to top from  # href link
+            $('.menu-parent li.menu-child > a').click(function (e) {
+                e.preventDefault();
+            });
+
+            // remove link from menu items that have children
+            $(".menu-parent li.menu-child > a").attr("href", "#");
+
+            //  function to open / close menu items
+            $(".menu-parent a").click(function () {
+                var link = $(this);
+                var closest_ul = link.closest("ul");
+                var parallel_active_links = closest_ul.find(".active")
+                var closest_li = link.closest("li");
+                var link_status = closest_li.hasClass("active");
+                var count = 0;
+
+                closest_ul.find("ul").slideUp(function () {
+                    if (++count == closest_ul.find("ul").length)
+                        parallel_active_links.removeClass("active");
+                });
+
+                if (!link_status) {
+                    closest_li.children("ul").slideDown();
+                    closest_li.addClass("active");
+                }
+            })
+        })
+
+    </script>
+
+
+
+
+</body>
+
+
+</html>

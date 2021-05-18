@@ -1,0 +1,19 @@
+{
+    "config": [{
+        "Rolename": "role1",
+        "RoleDescription": "The Description",
+        "Parameter": [{
+            "new_user": [{
+                "Username": "username",
+                "Password": "password",
+                "is_root": "False"
+            }],
+            "new_user2": [{
+                "Username": "username",
+                "Password": "password",
+                "is_root": "False"
+            }]
+        }
+    ]
+    }]
+}
